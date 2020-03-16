@@ -12,6 +12,7 @@ __pycache__/
 .LSOverride
 sms.py
 get_token.py
+main.py
 *.sublime-project
 *.sublime-workspace
 

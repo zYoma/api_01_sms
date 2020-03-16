@@ -20,13 +20,14 @@ def get_json(user_id):
     r = requests.get(method, data)
     return r.json()
 
-def sms_sender():
+def sms_sender(mesage):
     client = Client(account_sid, auth_token)
     message = client.messages.create(
-        body='User online!',
+        body= mesage,
         from_='+19367553922',
         to='+79298405593'
         )
+    
     return message.sid
 
 def get_status():
@@ -38,7 +39,7 @@ def main():
     while True:
         status = get_status()
         if status == 1:
-            sms_sender()
+            sms_sender(mesage='User online!')
             break
         
         time.sleep(5)
