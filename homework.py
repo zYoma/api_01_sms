@@ -2,11 +2,13 @@ import requests
 from twilio.rest import Client
 import os
 import time
+from dotenv import load_dotenv 
+load_dotenv()
 
 url = 'https://api.vk.com/method/'
-token = os.environ['sms_token']
-account_sid = os.environ['account_sid']
-auth_token = os.environ['auth_token']
+token = os.getenv("sms_token")
+auth_token = os.getenv("auth_token")
+account_sid = os.getenv("account_sid")
 
 def get_json(user_id):
     method = url + 'users.get'
