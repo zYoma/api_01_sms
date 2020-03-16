@@ -20,27 +20,27 @@ def get_json(user_id):
     r = requests.get(method, data)
     return r.json()
 
-def send_sms():
+def sms_sender():
     client = Client(account_sid, auth_token)
     message = client.messages.create(
         body='User online!',
         from_='+19367553922',
         to='+79298405593'
         )
+    return message.sid
 
-def check_status():
+def get_status():
     r = get_json('zyoma')
     status = r['response'][0]['online']
-    if status == 1:
-        send_sms()
-        return True
-
-    return False
+    return status
 
 def main():
-    offline = False
-    while not offline:
-        offline = check_status()
+    while True:
+        status = get_status()
+        if status == 1:
+            sms_sender()
+            break
+        
         time.sleep(5)
 
 
